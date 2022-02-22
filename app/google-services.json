@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "648156348047",
+    "project_id": "donofood-716f7",
+    "storage_bucket": "donofood-716f7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:648156348047:android:00bca300a14b2fed917afa",
+        "android_client_info": {
+          "package_name": "com.rashed.donofood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "648156348047-8nigd9h6jl95k2gi2hnjlumaihos27bi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVz_9rn57QIWbTunTmUp67qELTIfU4HjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "648156348047-8nigd9h6jl95k2gi2hnjlumaihos27bi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

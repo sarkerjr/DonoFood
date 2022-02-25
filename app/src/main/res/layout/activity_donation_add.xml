@@ -15,7 +15,7 @@
         <ImageView
             android:id="@+id/upload_food_image_id"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:scaleType="center"
             android:src="@drawable/ic_upload_image"
             app:layout_constraintEnd_toEndOf="parent"
@@ -138,6 +138,16 @@
             app:layout_constraintBottom_toBottomOf="@+id/phone_id"
             app:layout_constraintStart_toEndOf="@+id/phone_id"
             app:layout_constraintTop_toTopOf="@+id/phone_id" />
+
+        <Button
+            android:id="@+id/submit_food_donation_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="Submit Donation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phone_id" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "648156348047",
+    "firebase_url": "https://donofood-716f7-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "donofood-716f7",
     "storage_bucket": "donofood-716f7.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "648156348047-mujgdocho2gt8pbbg7jmko47c4lkjf2g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rashed.donofood",
+            "certificate_hash": "7e490beb4679f7bbcfedeecd5a530594925cdc4f"
+          }
+        },
         {
           "client_id": "648156348047-8nigd9h6jl95k2gi2hnjlumaihos27bi.apps.googleusercontent.com",
           "client_type": 3

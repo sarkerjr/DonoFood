@@ -1,22 +1,28 @@
 package com.rashed.donofood.Models;
 
-import java.net.URL;
+import java.util.UUID;
 
 public class FoodDonation {
+    String uuid;
     private String foodType;
     private String foodName;
     private Float quantity;
     private String location;
     private String phone;
-    private URL foodUrl;
+    private String imageFileName;
 
-    public FoodDonation(String foodType, String foodName, Float quantity, String location, String phone, URL foodUrl) {
-        this.foodType = foodType;
+    public FoodDonation(String uuid, String foodName, String foodType, Float quantity, String location, String phone, String imageFileName) {
+        this.uuid = uuid;
         this.foodName = foodName;
+        this.foodType = foodType;
         this.quantity = quantity;
         this.location = location;
         this.phone = phone;
-        this.foodUrl = foodUrl;
+        this.imageFileName = imageFileName;
+    }
+
+    public String getUuid() {
+        return uuid;
     }
 
     public String getFoodType() {
@@ -39,8 +45,8 @@ public class FoodDonation {
         return phone;
     }
 
-    public URL getFoodUrl() {
-        return foodUrl;
+    public String getImageFileName() {
+        return imageFileName;
     }
 
     public void setFoodType(String foodType) {
@@ -63,7 +69,7 @@ public class FoodDonation {
         this.phone = phone;
     }
 
-    public void setFoodUrl(URL foodUrl) {
-        this.foodUrl = foodUrl;
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
     }
 }

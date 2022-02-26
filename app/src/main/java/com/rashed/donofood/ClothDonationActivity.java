@@ -25,21 +25,21 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.rashed.donofood.Models.FoodDonation;
+import com.rashed.donofood.Models.ClothDonation;
 
 import java.io.IOException;
 import java.util.UUID;
 
-public class FoodDonateActivity extends AppCompatActivity {
+public class ClothDonationActivity extends AppCompatActivity {
     //Firebase
     FirebaseStorage storage;
     StorageReference storageReference;
 
-    Spinner foodTypeSpinner;
-    ImageView uploadFoodImage;
+    Spinner clothTypeSpinner;
+    ImageView uploadClothImage;
     Button submitDonationBtn;
-    EditText food_name_id;
-    EditText food_quantity_id;
+    EditText cloth_name_id;
+    EditText cloth_quantity_id;
     EditText area_id;
     EditText phone_id;
 
@@ -50,28 +50,28 @@ public class FoodDonateActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_food_donation);
+        setContentView(R.layout.activity_cloth_donation);
 
         if(FirebaseAuth.getInstance().getCurrentUser() == null)
-            startActivity(new Intent(FoodDonateActivity.this, SignInActivity.class));
+            startActivity(new Intent(ClothDonationActivity.this, SignInActivity.class));
 
-        food_name_id = findViewById(R.id.input_food_name);
-        food_quantity_id = findViewById(R.id.input_food_quantity_id);
+        cloth_name_id = findViewById(R.id.input_cloth_name);
+        cloth_quantity_id = findViewById(R.id.input_cloth_quantity_id);
         area_id = findViewById(R.id.input_area_id);
         phone_id = findViewById(R.id.input_phone_id);
 
 
         //Populating "Food Type" drop down menu
-        foodTypeSpinner = findViewById(R.id.food_type_spinner);
-        foodTypeSpinner.setAdapter(new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item, new String[]{"Veg", "Non-Veg"}));
+        clothTypeSpinner = findViewById(R.id.cloth_type_spinner);
+        clothTypeSpinner.setAdapter(new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, new String[]{"Summer", "Winter"}));
 
         //Handling donation image
-        uploadFoodImage = findViewById(R.id.upload_food_image_id);
-        submitDonationBtn = findViewById(R.id.submit_food_donation_btn);
+        uploadClothImage = findViewById(R.id.upload_cloth_image_id);
+        submitDonationBtn = findViewById(R.id.submit_cloth_donation_btn);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
-        uploadFoodImage.setOnClickListener(new View.OnClickListener() {
+        uploadClothImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 chooseImage();
@@ -100,7 +100,7 @@ public class FoodDonateActivity extends AppCompatActivity {
             filePath = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                uploadFoodImage.setImageBitmap(bitmap);
+                uploadClothImage.setImageBitmap(bitmap);
             }
             catch (IOException e) {
                 e.printStackTrace();
@@ -129,44 +129,44 @@ public class FoodDonateActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             progressDialog.dismiss();
-                            Toast.makeText(FoodDonateActivity.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ClothDonationActivity.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
         }
     }
 
-    //Start uploading data to firebase database after receiving image url
+    //Start uploading data to firebase database after receiving image FileName
     private void uploadToDatabase(String imageFileName) {
-        String foodName = String.valueOf(food_name_id.getText());
-        String foodType = foodTypeSpinner.getSelectedItem().toString();
-        float quantity = Float.parseFloat(String.valueOf(food_quantity_id.getText()));
+        String clothName = String.valueOf(cloth_name_id.getText());
+        String clothType = clothTypeSpinner.getSelectedItem().toString();
+        float quantity = Float.parseFloat(String.valueOf(cloth_quantity_id.getText()));
         String area = String.valueOf(area_id.getText());
         String phone = String.valueOf(phone_id.getText());
 
-        writeDatabase(foodName, foodType, quantity, area, phone, imageFileName);
+        writeDatabase(clothName, clothType, quantity, area, phone, imageFileName);
     }
 
     //Write data on database
-    private void writeDatabase(String foodName, String foodType, float quantity, String area, String phone, String imageFileName) {
+    private void writeDatabase(String clothName, String clothType, float quantity, String area, String phone, String imageFileName) {
         //Get UUID from current logged in user
         String uuid = UUID.randomUUID().toString(); //TODO: implement real id retrieving code
         //creating object to store it on database
-        FoodDonation donation = new FoodDonation(uuid, foodName, foodType, quantity, area, phone, imageFileName);
+        ClothDonation donation = new ClothDonation(uuid, clothName, clothType, quantity, area, phone, imageFileName);
         //getting firebase reference
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-        database.child("Donations").child("Food").push().setValue(donation)
+        database.child("Donations").child("Cloth").push().setValue(donation)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(FoodDonateActivity.this, "Uploaded successfully.",
+                        Toast.makeText(ClothDonationActivity.this, "Uploaded successfully.",
                                 Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(FoodDonateActivity.this, DashboardActivity.class));
+                        startActivity(new Intent(ClothDonationActivity.this, DashboardActivity.class));
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(FoodDonateActivity.this, "Upload Failed! Try again.",
+                        Toast.makeText(ClothDonationActivity.this, "Upload Failed! Try again.",
                                 Toast.LENGTH_LONG).show();
                     }
                 });

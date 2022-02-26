@@ -9,19 +9,28 @@ import android.view.View;
 
 public class DashboardActivity extends AppCompatActivity {
 
-    CardView addDonationview;
+    CardView addDonationFoodView;
+    CardView addDonationClothView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        addDonationview = findViewById(R.id.donate_food_id);
+        addDonationFoodView = findViewById(R.id.donate_food_id);
+        addDonationClothView = findViewById(R.id.donate_cloth_id);
 
-        addDonationview.setOnClickListener(new View.OnClickListener() {
+        addDonationFoodView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(DashboardActivity.this, FoodDonateActivity.class));
+            }
+        });
+
+        addDonationClothView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardActivity.this, ClothDonationActivity.class));
             }
         });
     }

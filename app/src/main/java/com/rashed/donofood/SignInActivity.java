@@ -24,10 +24,11 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         //Check if user is already signed in
-        if(FirebaseAuth.getInstance().getCurrentUser() == null) createSignInIntent();
-        else startActivity(new Intent(SignInActivity.this, DashboardActivity.class));
+        if(FirebaseAuth.getInstance().getCurrentUser() == null)
+            createSignInIntent();
+        if(FirebaseAuth.getInstance().getCurrentUser() != null)
+            startActivity(new Intent(SignInActivity.this, DashboardActivity.class));
     }
 
     private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(

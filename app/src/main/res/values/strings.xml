@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DonoFood</string>
+    <string name="search">Search</string>
+    <string name="enter_area_name">Enter Area Name</string>
 </resources>

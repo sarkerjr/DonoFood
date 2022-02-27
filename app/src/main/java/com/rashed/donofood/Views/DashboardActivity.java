@@ -14,6 +14,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     CardView addDonationFoodView;
     CardView addDonationClothView;
+    CardView searchOptionView;
     CardView logout;
 
     @Override
@@ -26,6 +27,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         addDonationFoodView = findViewById(R.id.donate_food_id);
         addDonationClothView = findViewById(R.id.donate_cloth_id);
+        searchOptionView = findViewById(R.id.search_option_id);
         logout = findViewById(R.id.logout_id);
 
         addDonationFoodView.setOnClickListener(view -> startActivity(
@@ -33,6 +35,9 @@ public class DashboardActivity extends AppCompatActivity {
 
         addDonationClothView.setOnClickListener(view ->
                 startActivity(new Intent(DashboardActivity.this, ClothDonationActivity.class)));
+
+        searchOptionView.setOnClickListener(view ->
+                startActivity(new Intent(DashboardActivity.this, SearchActivity.class)));
 
         logout.setOnClickListener(view -> AuthUI.getInstance()
                 .signOut(DashboardActivity.this)

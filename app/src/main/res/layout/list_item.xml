@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/donateItemName"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Rice and Fish"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="16dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_person"
+                    android:layout_marginStart="-16dp"
+                    android:layout_marginEnd="-8dp" />
+
+                <TextView
+                    android:id="@+id/donateItemQty"
+                    android:layout_width="0dp"
+                    android:layout_weight="9"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="-2dp"
+                    android:text="32"
+                    android:textStyle="italic"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/donateItemAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nobinbag 6 tala, Near Mosque"
+                android:textStyle="italic" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

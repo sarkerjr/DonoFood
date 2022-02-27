@@ -28,6 +28,7 @@ import com.google.firebase.storage.UploadTask;
 import com.rashed.donofood.Models.ClothDonation;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.UUID;
 
 public class ClothDonationActivity extends AppCompatActivity {
@@ -149,9 +150,9 @@ public class ClothDonationActivity extends AppCompatActivity {
     //Write data on database
     private void writeDatabase(String clothName, String clothType, float quantity, String area, String phone, String imageFileName) {
         //Get UUID from current logged in user
-        String uuid = UUID.randomUUID().toString(); //TODO: implement real id retrieving code
+        String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         //creating object to store it on database
-        ClothDonation donation = new ClothDonation(uuid, clothName, clothType, quantity, area, phone, imageFileName);
+        ClothDonation donation = new ClothDonation(uid, clothName, clothType, quantity, area, phone, imageFileName);
         //getting firebase reference
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         database.child("Donations").child("Cloth").push().setValue(donation)

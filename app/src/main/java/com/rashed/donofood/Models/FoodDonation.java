@@ -1,9 +1,7 @@
 package com.rashed.donofood.Models;
 
-import java.util.UUID;
-
 public class FoodDonation {
-    String uuid;
+    String uid;
     private String foodType;
     private String foodName;
     private Float quantity;
@@ -11,8 +9,8 @@ public class FoodDonation {
     private String phone;
     private String imageFileName;
 
-    public FoodDonation(String uuid, String foodName, String foodType, Float quantity, String location, String phone, String imageFileName) {
-        this.uuid = uuid;
+    public FoodDonation(String uid, String foodName, String foodType, Float quantity, String location, String phone, String imageFileName) {
+        this.uid = uid;
         this.foodName = foodName;
         this.foodType = foodType;
         this.quantity = quantity;
@@ -21,8 +19,8 @@ public class FoodDonation {
         this.imageFileName = imageFileName;
     }
 
-    public String getUuid() {
-        return uuid;
+    public String getUid() {
+        return uid;
     }
 
     public String getFoodType() {

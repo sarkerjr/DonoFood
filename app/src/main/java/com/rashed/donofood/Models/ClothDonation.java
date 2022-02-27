@@ -1,7 +1,7 @@
 package com.rashed.donofood.Models;
 
 public class ClothDonation {
-    String uuid;
+    String uid;
     private String clothName;
     private String clothType;
     private Float quantity;
@@ -9,8 +9,8 @@ public class ClothDonation {
     private String phone;
     private String imageFileName;
 
-    public ClothDonation(String uuid, String clothName, String clothType, Float quantity, String location, String phone, String imageFileName) {
-        this.uuid = uuid;
+    public ClothDonation(String uid, String clothName, String clothType, Float quantity, String location, String phone, String imageFileName) {
+        this.uid = uid;
         this.clothName = clothName;
         this.clothType = clothType;
         this.quantity = quantity;
@@ -19,12 +19,12 @@ public class ClothDonation {
         this.imageFileName = imageFileName;
     }
 
-    public String getUuid() {
-        return uuid;
+    public String getUid() {
+        return uid;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getClothName() {

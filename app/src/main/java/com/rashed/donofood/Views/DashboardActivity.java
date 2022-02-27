@@ -1,15 +1,14 @@
-package com.rashed.donofood;
+package com.rashed.donofood.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.rashed.donofood.R;
 
 public class DashboardActivity extends AppCompatActivity {
 

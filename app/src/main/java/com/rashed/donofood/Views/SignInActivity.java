@@ -1,4 +1,4 @@
-package com.rashed.donofood;
+package com.rashed.donofood.Views;
 
 import static android.content.ContentValues.TAG;
 

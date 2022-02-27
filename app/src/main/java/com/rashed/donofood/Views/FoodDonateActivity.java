@@ -1,4 +1,4 @@
-package com.rashed.donofood;
+package com.rashed.donofood.Views;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +26,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.rashed.donofood.Models.FoodDonation;
+import com.rashed.donofood.R;
 
 import java.io.IOException;
 import java.util.Objects;

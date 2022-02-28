@@ -4,12 +4,15 @@ public class FoodDonation {
     String uid;
     private String foodType;
     private String foodName;
-    private Float quantity;
+    private int quantity;
     private String location;
     private String phone;
     private String imageFileName;
 
-    public FoodDonation(String uid, String foodName, String foodType, Float quantity, String location, String phone, String imageFileName) {
+    //Need this non argument constructor to work adapter properly
+    public FoodDonation() {}
+
+    public FoodDonation(String uid, String foodName, String foodType, int quantity, String location, String phone, String imageFileName) {
         this.uid = uid;
         this.foodName = foodName;
         this.foodType = foodType;
@@ -31,7 +34,7 @@ public class FoodDonation {
         return foodName;
     }
 
-    public Float getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
@@ -55,7 +58,7 @@ public class FoodDonation {
         this.foodName = foodName;
     }
 
-    public void setQuantity(Float quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 

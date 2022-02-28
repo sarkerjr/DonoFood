@@ -41,7 +41,7 @@ public class DonationAdapter extends ArrayAdapter<FoodDonation> {
             donateItemAddress.setText(currentDonation.getLocation());
 
             TextView donateItemQty = (TextView) listItemView.findViewById(R.id.donateItemQty);
-            donateItemQty.setText(currentDonation.getQuantity().toString());
+            donateItemQty.setText(Integer.toString(currentDonation.getQuantity()));
         }
 
         // Return the whole list item layout

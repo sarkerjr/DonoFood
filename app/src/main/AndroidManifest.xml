@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DonoFood">
         <activity
+            android:name=".Views.ViewFoodDonationActivity"
+            android:exported="false" />
+        <activity
             android:name=".Views.SearchActivity"
             android:exported="false" />
         <activity

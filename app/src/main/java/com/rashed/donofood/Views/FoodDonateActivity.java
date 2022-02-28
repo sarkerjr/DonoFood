@@ -141,7 +141,7 @@ public class FoodDonateActivity extends AppCompatActivity {
     private void uploadToDatabase(String imageFileName) {
         String foodName = String.valueOf(food_name_id.getText());
         String foodType = foodTypeSpinner.getSelectedItem().toString();
-        float quantity = Float.parseFloat(String.valueOf(food_quantity_id.getText()));
+        int quantity = Integer.parseInt(String.valueOf(food_quantity_id.getText()));
         String area = String.valueOf(area_id.getText());
         String phone = String.valueOf(phone_id.getText());
 
@@ -149,7 +149,7 @@ public class FoodDonateActivity extends AppCompatActivity {
     }
 
     //Write data on database
-    private void writeDatabase(String foodName, String foodType, float quantity, String area, String phone, String imageFileName) {
+    private void writeDatabase(String foodName, String foodType, int quantity, String area, String phone, String imageFileName) {
         //Get UUID from current logged in user
         String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         //creating object to store it on database

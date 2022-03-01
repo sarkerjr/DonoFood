@@ -13,10 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DonoFood">
         <activity
-            android:name=".Views.ViewFoodDonationActivity"
+            android:name=".Views.FoodDonationViewActivity"
             android:exported="false" />
         <activity
-            android:name=".Views.SearchActivity"
+            android:name=".Views.FoodSearchActivity"
             android:exported="false" />
         <activity
             android:name=".Views.ClothDonationActivity"

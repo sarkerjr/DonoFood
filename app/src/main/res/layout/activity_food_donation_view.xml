@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Views.FoodDonationViewActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/showDonationPic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_upload_image"
+            android:scaleType="center"/>
+
+        <TextView
+            android:id="@+id/showDonationTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Food Donation Title With Long"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/showDonationPic" />
+
+        <TextView
+            android:id="@+id/donationType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Food Type: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/showDonationTitle" />
+
+        <TextView
+            android:id="@+id/showDonationType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Non-Veg"
+            app:layout_constraintBottom_toBottomOf="@+id/donationType"
+            app:layout_constraintStart_toEndOf="@+id/donationType"
+            app:layout_constraintTop_toTopOf="@+id/donationType" />
+
+        <TextView
+            android:id="@+id/donationQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Food Quantity: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/donationType" />
+
+        <TextView
+            android:id="@+id/showDonationQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30"
+            app:layout_constraintBottom_toBottomOf="@+id/donationQuantity"
+            app:layout_constraintStart_toEndOf="@+id/donationQuantity"
+            app:layout_constraintTop_toTopOf="@+id/donationQuantity" />
+
+        <TextView
+            android:id="@+id/donationArea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Area: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/donationQuantity" />
+
+        <TextView
+            android:id="@+id/showDonationArea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nobinbag"
+            app:layout_constraintBottom_toBottomOf="@+id/donationArea"
+            app:layout_constraintStart_toEndOf="@+id/donationArea"
+            app:layout_constraintTop_toTopOf="@+id/donationArea" />
+
+        <TextView
+            android:id="@+id/donationPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Contact: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/donationArea" />
+
+        <TextView
+            android:id="@+id/showDonationPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="01521345678"
+            app:layout_constraintBottom_toBottomOf="@+id/donationPhone"
+            app:layout_constraintStart_toEndOf="@+id/donationPhone"
+            app:layout_constraintTop_toTopOf="@+id/donationPhone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -3,19 +3,20 @@ package com.rashed.donofood.Views;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.rashed.donofood.Models.FoodDonation;
@@ -27,20 +28,25 @@ public class SearchActivity extends AppCompatActivity {
     Query databaseReference;
     DonationAdapter donationAdapter;
     ListView listView;
-    Spinner donationSearchOption;
+    Spinner donateFoodType;
     Button donationSearchButton;
+    EditText donationSearchInput;
+    TextView donationNotFoundView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        donationSearchInput = findViewById(R.id.donation_search_input);
+        donationNotFoundView = findViewById(R.id.donation_not_found_id);
+
         donationSearchButton = findViewById(R.id.donation_search_button);
         listView = findViewById(R.id.donation_list_view);
 
 
-        donationSearchOption = findViewById(R.id.donation_search_option_spinner);
-        donationSearchOption.setAdapter(new ArrayAdapter<>(this,
+        donateFoodType = findViewById(R.id.donation_search_option_spinner);
+        donateFoodType.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item, new String[]{"Veg", "Non-Veg"}));
 
         //This arrayList is for listView onItemClickListener
@@ -51,7 +57,7 @@ public class SearchActivity extends AppCompatActivity {
         //Database references for doing operation on Firebase database
         databaseReference = FirebaseDatabase.getInstance().getReference()
                 .child("Donations").child("Food").orderByChild("foodType")
-                .equalTo(donationSearchOption.getSelectedItem().toString());
+                .equalTo(donateFoodType.getSelectedItem().toString());
 
         ChildEventListener listener = new ChildEventListener() {
             @Override
@@ -108,19 +114,49 @@ public class SearchActivity extends AppCompatActivity {
                 //Clearing old arrayList and adapter
                 donationAdapter.clear();
 
-                //Updating the database reference with new option selected
-                databaseReference = FirebaseDatabase.getInstance().getReference()
-                        .child("Donations").child("Food").orderByChild("foodType")
-                        .equalTo(donationSearchOption.getSelectedItem().toString());
+                String donationSearchParam = donationSearchInput.getText().toString().trim();
+                //Check if donation search query exist then do query on that parameter
+                if(donationSearchParam.length() != 0) {
+                    databaseReference = FirebaseDatabase.getInstance().getReference()
+                            .child("Donations").child("Food").orderByChild("location")
+                            .equalTo(donationSearchInput.getText().toString().trim());
+                }else {
+                    //Updating the database reference with new option selected
+                    databaseReference = FirebaseDatabase.getInstance().getReference()
+                            .child("Donations").child("Food").orderByChild("foodType")
+                            .equalTo(donateFoodType.getSelectedItem().toString());
+                }
 
                 //Updating the listView according to selection of Location
                 ChildEventListener listener = new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        //Add products to adapter to show on MainActivity
-                        donationAdapter.add(dataSnapshot.getValue(FoodDonation.class));
-                        //Notify the ListView to update changes
-                        donationAdapter.notifyDataSetChanged();
+                        if(dataSnapshot.exists()){
+                            //Hide NOT FOUND message if query exist
+                            listView.setVisibility(View.VISIBLE);
+                            donationNotFoundView.setVisibility(View.GONE);
+
+                            //Getting the current search object
+                            FoodDonation donation = dataSnapshot.getValue(FoodDonation.class);
+
+                            //If search param exist and is equal to "foodType" field
+                            if(donationSearchParam.length() != 0 &&
+                                    donateFoodType.getSelectedItem().toString().equals(donation.getFoodType())){
+                                donationAdapter.add(dataSnapshot.getValue(FoodDonation.class));
+                                donationAdapter.notifyDataSetChanged();
+                            }
+                            //If no search param found then query throw "foodType" option
+                            else if(donationSearchParam.length() == 0){
+                                //Add products to adapter to show on MainActivity
+                                donationAdapter.add(dataSnapshot.getValue(FoodDonation.class));
+                                //Notify the ListView to update changes
+                                donationAdapter.notifyDataSetChanged();
+                            }
+                        }else {
+                            //Show NOT FOUND message if no query result found
+                            listView.setVisibility(View.GONE);
+                            donationNotFoundView.setVisibility(View.VISIBLE);
+                        }
                     }
 
                     @Override

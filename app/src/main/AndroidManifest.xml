@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DonoFood">
         <activity
+            android:name=".Views.FoodDonationEditActivity"
+            android:exported="false" />
+        <activity
             android:name=".Views.FoodDonationViewActivity"
             android:exported="false" />
         <activity
@@ -22,7 +25,7 @@
             android:name=".Views.ClothDonationActivity"
             android:exported="false" />
         <activity
-            android:name=".Views.FoodDonateActivity"
+            android:name=".Views.FoodDonateAddActivity"
             android:exported="false" />
         <activity
             android:name=".Views.DashboardActivity"

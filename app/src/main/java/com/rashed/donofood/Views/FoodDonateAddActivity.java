@@ -32,7 +32,7 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.UUID;
 
-public class FoodDonateActivity extends AppCompatActivity {
+public class FoodDonateAddActivity extends AppCompatActivity {
     //Firebase
     FirebaseStorage storage;
     StorageReference storageReference;
@@ -55,7 +55,7 @@ public class FoodDonateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_food_donation);
 
         if(FirebaseAuth.getInstance().getCurrentUser() == null)
-            startActivity(new Intent(FoodDonateActivity.this, SignInActivity.class));
+            startActivity(new Intent(FoodDonateAddActivity.this, SignInActivity.class));
 
         food_name_id = findViewById(R.id.input_food_name);
         food_quantity_id = findViewById(R.id.input_food_quantity_id);
@@ -73,18 +73,10 @@ public class FoodDonateActivity extends AppCompatActivity {
         submitDonationBtn = findViewById(R.id.submit_food_donation_btn);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
-        uploadFoodImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chooseImage();
-            }
-        });
-        submitDonationBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                uploadImage();
-            }
-        });
+
+        uploadFoodImage.setOnClickListener(v -> chooseImage());
+
+        submitDonationBtn.setOnClickListener(v -> uploadImage());
     }
 
     private void chooseImage() {
@@ -118,21 +110,15 @@ public class FoodDonateActivity extends AppCompatActivity {
 
             StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
             ref.putFile(filePath)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            progressDialog.dismiss();
-                            //Get image file name from result
-                            String fileName = taskSnapshot.getStorage().getName().toString();
-                            uploadToDatabase(fileName);
-                        }
+                    .addOnSuccessListener(taskSnapshot -> {
+                        progressDialog.dismiss();
+                        //Get image file name from result
+                        String fileName = taskSnapshot.getStorage().getName();
+                        uploadToDatabase(fileName);
                     })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            progressDialog.dismiss();
-                            Toast.makeText(FoodDonateActivity.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
+                    .addOnFailureListener(e -> {
+                        progressDialog.dismiss();
+                        Toast.makeText(FoodDonateAddActivity.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
         }
     }
@@ -160,15 +146,15 @@ public class FoodDonateActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(FoodDonateActivity.this, "Uploaded successfully.",
+                        Toast.makeText(FoodDonateAddActivity.this, "Uploaded successfully.",
                                 Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(FoodDonateActivity.this, DashboardActivity.class));
+                        startActivity(new Intent(FoodDonateAddActivity.this, DashboardActivity.class));
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(FoodDonateActivity.this, "Upload Failed! Try again.",
+                        Toast.makeText(FoodDonateAddActivity.this, "Upload Failed! Try again.",
                                 Toast.LENGTH_LONG).show();
                     }
                 });

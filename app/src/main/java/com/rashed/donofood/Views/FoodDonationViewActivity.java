@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -21,6 +22,8 @@ import com.rashed.donofood.Models.FoodDonation;
 import com.rashed.donofood.R;
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
+
 public class FoodDonationViewActivity extends AppCompatActivity {
 
     ImageView donationPic;
@@ -29,8 +32,8 @@ public class FoodDonationViewActivity extends AppCompatActivity {
     TextView donationQty;
     TextView donationArea;
     TextView donationPhone;
-    CardView donationContainerView;
-    ProgressBar donationLoadingIndicator;
+    Button editDonationBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,21 +46,31 @@ public class FoodDonationViewActivity extends AppCompatActivity {
         donationQty = findViewById(R.id.showDonationQuantity);
         donationArea = findViewById(R.id.showDonationArea);
         donationPhone = findViewById(R.id.showDonationPhone);
-        donationLoadingIndicator = findViewById(R.id.donationLoadingIndicator);
+        editDonationBtn = findViewById(R.id.editDonationButton);
 
         //Get selected Donation object from previous activity
         FoodDonation donation = (FoodDonation) getIntent().getSerializableExtra("selectedFoodDonation");
 
         showDonation(donation);
+
+        editDonationBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(FoodDonationViewActivity.this, FoodDonationEditActivity.class);
+            intent.putExtra("passedFoodDonation", (Serializable) donation);
+            startActivity(intent);
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(FoodDonationViewActivity.this, FoodSearchActivity.class));
     }
 
     void showDonation(FoodDonation donation) {
-        donationLoadingIndicator.setVisibility(View.VISIBLE);
         StorageReference storage = FirebaseStorage.getInstance().getReference().child("images/" + donation.getImageFileName().trim());
         storage.getDownloadUrl().addOnSuccessListener(uri -> {
             Picasso.get().load(uri.toString())
                     .placeholder(R.drawable.progress_animation).into(donationPic);
-            donationLoadingIndicator.setVisibility(View.GONE);
             donationName.setText(donation.getFoodName());
             donationType.setText(donation.getFoodType());
             donationQty.setText(String.valueOf(donation.getQuantity()));

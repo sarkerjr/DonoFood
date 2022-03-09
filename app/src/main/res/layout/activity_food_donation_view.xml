@@ -11,16 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ProgressBar
-            android:id="@+id/donationLoadingIndicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:visibility="gone"/>
-
         <ImageView
             android:id="@+id/showDonationPic"
             android:layout_width="wrap_content"
@@ -123,6 +113,17 @@
             app:layout_constraintBottom_toBottomOf="@+id/donationPhone"
             app:layout_constraintStart_toEndOf="@+id/donationPhone"
             app:layout_constraintTop_toTopOf="@+id/donationPhone" />
+
+        <Button
+            android:id="@+id/editDonationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Edit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/donationPhone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

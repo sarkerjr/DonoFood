@@ -33,7 +33,7 @@ public class DashboardActivity extends AppCompatActivity {
         logout = findViewById(R.id.logout_id);
 
         addDonationFoodView.setOnClickListener(view -> startActivity(
-                new Intent(DashboardActivity.this, FoodDonateActivity.class)));
+                new Intent(DashboardActivity.this, FoodDonateAddActivity.class)));
 
         addDonationClothView.setOnClickListener(view ->
                 startActivity(new Intent(DashboardActivity.this, ClothDonationActivity.class)));

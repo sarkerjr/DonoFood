@@ -58,7 +58,7 @@ public class FoodSearchActivity extends AppCompatActivity {
         listView.setAdapter(donationAdapter);
         donationAdapter.notifyDataSetChanged();
 
-        //Database references for doing operation on Firebase database
+        //Database references for doing query operation on Firebase database
         databaseReference = FirebaseDatabase.getInstance().getReference()
                 .child("Donations").child("Food").orderByChild("foodType")
                 .equalTo(donateFoodType.getSelectedItem().toString());
@@ -125,7 +125,7 @@ public class FoodSearchActivity extends AppCompatActivity {
             }
 
             //Updating the listView according to selection of Location
-            ChildEventListener listener1 = new ChildEventListener() {
+            ChildEventListener queryListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                     if(dataSnapshot.exists()){
@@ -138,7 +138,8 @@ public class FoodSearchActivity extends AppCompatActivity {
 
                         //If search param exist and is equal to "foodType" field
                         if(donationSearchParam.length() != 0 &&
-                                donateFoodType.getSelectedItem().toString().equals(donation.getFoodType())){
+                                donateFoodType.getSelectedItem().toString().
+                                        equals(donation != null ? donation.getFoodType() : null)){
                             donationAdapter.add(dataSnapshot.getValue(FoodDonation.class));
                             donationAdapter.notifyDataSetChanged();
                         }
@@ -176,7 +177,13 @@ public class FoodSearchActivity extends AppCompatActivity {
                     Toast.makeText(FoodSearchActivity.this, "Something Wrong!", Toast.LENGTH_LONG).show();
                 }
             };
-            databaseReference.addChildEventListener(listener1);
+            databaseReference.addChildEventListener(queryListener);
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, DashboardActivity.class));
     }
 }

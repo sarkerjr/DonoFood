@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.rashed.donofood.Models.FoodDonation;
+import com.rashed.donofood.Models.ClothDonation;
 import com.rashed.donofood.R;
 import com.squareup.picasso.Picasso;
 
@@ -26,7 +26,7 @@ public class ClothDonationViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_food_donation_view);
+        setContentView(R.layout.activity_cloth_donation_view);
 
         donationPic = findViewById(R.id.showDonationPic);
         donationName = findViewById(R.id.showDonationTitle);
@@ -37,7 +37,7 @@ public class ClothDonationViewActivity extends AppCompatActivity {
 //        editDonationBtn = findViewById(R.id.editDonationButton);
 
         //Get selected Donation object from previous activity
-        FoodDonation donation = (FoodDonation) getIntent().getSerializableExtra("selectedClothDonation");
+        ClothDonation donation = (ClothDonation) getIntent().getSerializableExtra("selectedClothDonation");
 
         showDonation(donation);
 
@@ -51,16 +51,16 @@ public class ClothDonationViewActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(ClothDonationViewActivity.this, FoodSearchActivity.class));
+        startActivity(new Intent(ClothDonationViewActivity.this, ClothSearchActivity.class));
     }
 
-    void showDonation(FoodDonation donation) {
+    void showDonation(ClothDonation donation) {
         StorageReference storage = FirebaseStorage.getInstance().getReference().child("images/" + donation.getImageFileName().trim());
         storage.getDownloadUrl().addOnSuccessListener(uri -> {
             Picasso.get().load(uri.toString())
                     .placeholder(R.drawable.progress_animation).into(donationPic);
-            donationName.setText(donation.getFoodName());
-            donationType.setText(donation.getFoodType());
+            donationName.setText(donation.getClothName());
+            donationType.setText(donation.getClothType());
             donationQty.setText(String.valueOf(donation.getQuantity()));
             donationArea.setText(donation.getLocation());
             donationPhone.setText(donation.getPhone());

@@ -1,6 +1,8 @@
 package com.rashed.donofood.Models;
 
-public class ClothDonation {
+import java.io.Serializable;
+
+public class ClothDonation implements Serializable {
     String uid;
     private String clothName;
     private String clothType;

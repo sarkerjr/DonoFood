@@ -10,4 +10,6 @@
 
     <!--  Custom Color  -->
     <color name="list_view_bg_color">#e4e9ef</color>
+    <color name="food_donation_search_btn">#FF5722</color>
+    <color name="cloth_donation_search_btn">#00BCD4</color>
 </resources>

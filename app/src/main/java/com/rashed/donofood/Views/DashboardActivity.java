@@ -3,6 +3,7 @@ package com.rashed.donofood.Views;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -36,17 +37,26 @@ public class DashboardActivity extends AppCompatActivity {
                 new Intent(DashboardActivity.this, FoodDonateAddActivity.class)));
 
         addDonationClothView.setOnClickListener(view ->
-                startActivity(new Intent(DashboardActivity.this, ClothDonationActivity.class)));
+                startActivity(new Intent(DashboardActivity.this, ClothDonateAddActivity.class)));
 
-        searchOptionView.setOnClickListener(view ->
-                startActivity(new Intent(DashboardActivity.this, FoodSearchActivity.class)));
-
-        contactUsView.setOnClickListener(view ->
-                startActivity(new Intent(DashboardActivity.this, FoodDonationViewActivity.class)));
+        searchOptionView.setOnClickListener(view -> {
+            openSearchOptionDialog();
+        });
 
         logout.setOnClickListener(view -> AuthUI.getInstance()
                 .signOut(DashboardActivity.this)
                 .addOnSuccessListener(unused -> startActivity(
                         new Intent(DashboardActivity.this, SignInActivity.class))));
+    }
+
+    public void openSearchOptionDialog() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage(R.string.donation_seach_option_title);
+        alertDialogBuilder.setPositiveButton("Cloth",
+                (arg0, arg1) -> startActivity(new Intent(DashboardActivity.this, ClothSearchActivity.class)));
+        alertDialogBuilder.setNegativeButton("Food",
+                (arg0, arg1) -> startActivity(new Intent(DashboardActivity.this, FoodSearchActivity.class)));
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 }

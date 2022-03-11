@@ -4,12 +4,14 @@ public class ClothDonation {
     String uid;
     private String clothName;
     private String clothType;
-    private Float quantity;
+    private int quantity;
     private String location;
     private String phone;
     private String imageFileName;
 
-    public ClothDonation(String uid, String clothName, String clothType, Float quantity, String location, String phone, String imageFileName) {
+    public ClothDonation() {}
+
+    public ClothDonation(String uid, String clothName, String clothType, int quantity, String location, String phone, String imageFileName) {
         this.uid = uid;
         this.clothName = clothName;
         this.clothType = clothType;
@@ -43,11 +45,11 @@ public class ClothDonation {
         this.clothType = clothType;
     }
 
-    public Float getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Float quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 

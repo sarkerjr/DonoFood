@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:ems="10"
-            android:hint="Quantity of Food"
+            android:hint="Quantity of Cloth"
             android:inputType="number"
             app:layout_constraintBottom_toBottomOf="@+id/cloth_quantity_id"
             app:layout_constraintStart_toEndOf="@+id/cloth_quantity_id"

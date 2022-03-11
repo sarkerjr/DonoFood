@@ -32,7 +32,7 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.UUID;
 
-public class ClothDonationActivity extends AppCompatActivity {
+public class ClothDonateAddActivity extends AppCompatActivity {
     //Firebase
     FirebaseStorage storage;
     StorageReference storageReference;
@@ -55,7 +55,7 @@ public class ClothDonationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cloth_donation);
 
         if(FirebaseAuth.getInstance().getCurrentUser() == null)
-            startActivity(new Intent(ClothDonationActivity.this, SignInActivity.class));
+            startActivity(new Intent(ClothDonateAddActivity.this, SignInActivity.class));
 
         cloth_name_id = findViewById(R.id.input_cloth_name);
         cloth_quantity_id = findViewById(R.id.input_cloth_quantity_id);
@@ -118,21 +118,15 @@ public class ClothDonationActivity extends AppCompatActivity {
 
             StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
             ref.putFile(filePath)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            progressDialog.dismiss();
-                            //Get image file name from result
-                            String fileName = taskSnapshot.getStorage().getName().toString();
-                            uploadToDatabase(fileName);
-                        }
+                    .addOnSuccessListener(taskSnapshot -> {
+                        progressDialog.dismiss();
+                        //Get image file name from result
+                        String fileName = taskSnapshot.getStorage().getName().toString();
+                        uploadToDatabase(fileName);
                     })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            progressDialog.dismiss();
-                            Toast.makeText(ClothDonationActivity.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
+                    .addOnFailureListener(e -> {
+                        progressDialog.dismiss();
+                        Toast.makeText(ClothDonateAddActivity.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
         }
     }
@@ -141,7 +135,7 @@ public class ClothDonationActivity extends AppCompatActivity {
     private void uploadToDatabase(String imageFileName) {
         String clothName = String.valueOf(cloth_name_id.getText());
         String clothType = clothTypeSpinner.getSelectedItem().toString();
-        float quantity = Float.parseFloat(String.valueOf(cloth_quantity_id.getText()));
+        int quantity = Integer.parseInt(String.valueOf(cloth_quantity_id.getText()));
         String area = String.valueOf(area_id.getText());
         String phone = String.valueOf(phone_id.getText());
 
@@ -149,7 +143,7 @@ public class ClothDonationActivity extends AppCompatActivity {
     }
 
     //Write data on database
-    private void writeDatabase(String clothName, String clothType, float quantity, String area, String phone, String imageFileName) {
+    private void writeDatabase(String clothName, String clothType, int quantity, String area, String phone, String imageFileName) {
         //Get UUID from current logged in user
         String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         //creating object to store it on database
@@ -157,20 +151,12 @@ public class ClothDonationActivity extends AppCompatActivity {
         //getting firebase reference
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         database.child("Donations").child("Cloth").push().setValue(donation)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(ClothDonationActivity.this, "Uploaded successfully.",
-                                Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(ClothDonationActivity.this, DashboardActivity.class));
-                    }
+                .addOnSuccessListener(unused -> {
+                    Toast.makeText(ClothDonateAddActivity.this, "Uploaded successfully.",
+                            Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(ClothDonateAddActivity.this, DashboardActivity.class));
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ClothDonationActivity.this, "Upload Failed! Try again.",
-                                Toast.LENGTH_LONG).show();
-                    }
-                });
+                .addOnFailureListener(e -> Toast.makeText(ClothDonateAddActivity.this, "Upload Failed! Try again.",
+                        Toast.LENGTH_LONG).show());
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Views.FoodDonationViewActivity">
+    tools:context=".Views.ClothDonationViewActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/donationContainerView"
@@ -28,7 +28,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:text="Food Donation Title With Long"
+            android:text="Cloth Donation Title With Long"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +41,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:text="Food Type: "
+            android:text="Cloth Type: "
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/showDonationTitle" />
 
@@ -49,7 +49,7 @@
             android:id="@+id/showDonationType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Non-Veg"
+            android:text="Summer"
             app:layout_constraintBottom_toBottomOf="@+id/donationType"
             app:layout_constraintStart_toEndOf="@+id/donationType"
             app:layout_constraintTop_toTopOf="@+id/donationType" />
@@ -61,7 +61,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:text="Food Quantity: "
+            android:text="Cloth Quantity: "
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/donationType" />
 
@@ -114,16 +114,16 @@
             app:layout_constraintStart_toEndOf="@+id/donationPhone"
             app:layout_constraintTop_toTopOf="@+id/donationPhone" />
 
-<!--        <Button-->
-<!--            android:id="@+id/editDonationButton"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="16dp"-->
-<!--            android:text="Edit"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.498"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/donationPhone" />-->
+        <!--        <Button-->
+        <!--            android:id="@+id/editDonationButton"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="16dp"-->
+        <!--            android:text="Edit"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.498"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/donationPhone" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,18 +1,18 @@
 package com.rashed.donofood.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.rashed.donofood.Models.FoodDonation;
 import com.rashed.donofood.R;
 import com.squareup.picasso.Picasso;
 
-public class FoodDonationViewActivity extends AppCompatActivity {
+public class ClothDonationViewActivity extends AppCompatActivity {
 
     ImageView donationPic;
     TextView donationName;
@@ -37,7 +37,7 @@ public class FoodDonationViewActivity extends AppCompatActivity {
 //        editDonationBtn = findViewById(R.id.editDonationButton);
 
         //Get selected Donation object from previous activity
-        FoodDonation donation = (FoodDonation) getIntent().getSerializableExtra("selectedFoodDonation");
+        FoodDonation donation = (FoodDonation) getIntent().getSerializableExtra("selectedClothDonation");
 
         showDonation(donation);
 
@@ -51,7 +51,7 @@ public class FoodDonationViewActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(FoodDonationViewActivity.this, FoodSearchActivity.class));
+        startActivity(new Intent(ClothDonationViewActivity.this, FoodSearchActivity.class));
     }
 
     void showDonation(FoodDonation donation) {

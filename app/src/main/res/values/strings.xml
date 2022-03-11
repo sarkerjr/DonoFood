@@ -2,4 +2,6 @@
     <string name="app_name">DonoFood</string>
     <string name="search">Search</string>
     <string name="enter_area_name">Enter Area Name</string>
+    <string name="donation_seach_description">Select the type of donation search to proceed.</string>
+    <string name="donation_seach_option_title">Select Search Category</string>
 </resources>

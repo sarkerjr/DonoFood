@@ -12,9 +12,9 @@ import com.rashed.donofood.Models.FoodDonation;
 import com.rashed.donofood.R;
 import java.util.List;
 
-public class DonationAdapter extends ArrayAdapter<FoodDonation> {
+public class FoodDonationAdapter extends ArrayAdapter<FoodDonation> {
 
-    public DonationAdapter(@NonNull Context context, @NonNull List<FoodDonation> objects) {
+    public FoodDonationAdapter(@NonNull Context context, @NonNull List<FoodDonation> objects) {
         super(context, 0, objects);
     }
 
@@ -34,13 +34,13 @@ public class DonationAdapter extends ArrayAdapter<FoodDonation> {
 
         if(currentDonation != null) {
             //Update listView with current Donation object
-            TextView donateItemName = (TextView) listItemView.findViewById(R.id.donateItemName);
+            TextView donateItemName = listItemView.findViewById(R.id.donateItemName);
             donateItemName.setText(currentDonation.getFoodName());
 
-            TextView donateItemAddress = (TextView) listItemView.findViewById(R.id.donateItemAddress);
+            TextView donateItemAddress = listItemView.findViewById(R.id.donateItemAddress);
             donateItemAddress.setText(currentDonation.getLocation());
 
-            TextView donateItemQty = (TextView) listItemView.findViewById(R.id.donateItemQty);
+            TextView donateItemQty = listItemView.findViewById(R.id.donateItemQty);
             donateItemQty.setText(Integer.toString(currentDonation.getQuantity()));
         }
 

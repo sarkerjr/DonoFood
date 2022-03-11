@@ -19,16 +19,17 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.rashed.donofood.Models.FoodDonation;
+import com.rashed.donofood.Models.ClothDonation;
 import com.rashed.donofood.R;
-import com.rashed.donofood.Utils.FoodDonationAdapter;
+import com.rashed.donofood.Utils.ClothDonationAdapter;
+
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class FoodSearchActivity extends AppCompatActivity {
+public class ClothSearchActivity extends AppCompatActivity {
     Query databaseReference;
-    FoodDonationAdapter foodDonationAdapter;
+    ClothDonationAdapter clothDonationAdapter;
     ListView listView;
     Spinner donateFoodType;
     Button donationSearchButton;
@@ -38,7 +39,7 @@ public class FoodSearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_food_search);
+        setContentView(R.layout.activity_cloth_search);
 
         donationSearchInput = findViewById(R.id.donation_search_input);
         donationNotFoundView = findViewById(R.id.donation_not_found_id);
@@ -49,45 +50,45 @@ public class FoodSearchActivity extends AppCompatActivity {
 
         donateFoodType = findViewById(R.id.donation_search_option_spinner);
         donateFoodType.setAdapter(new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item, new String[]{"Veg", "Non-Veg"}));
+                android.R.layout.simple_spinner_dropdown_item, new String[]{"Summer", "Winter"}));
 
         //This arrayList is for listView onItemClickListener
-        foodDonationAdapter = new FoodDonationAdapter(FoodSearchActivity.this, new ArrayList<FoodDonation>());
-        listView.setAdapter(foodDonationAdapter);
-        foodDonationAdapter.notifyDataSetChanged();
+        clothDonationAdapter = new ClothDonationAdapter(ClothSearchActivity.this, new ArrayList<ClothDonation>());
+        listView.setAdapter(clothDonationAdapter);
+        clothDonationAdapter.notifyDataSetChanged();
 
         //Database references for doing query operation on Firebase database
         databaseReference = FirebaseDatabase.getInstance().getReference()
-                .child("Donations").child("Food").orderByChild("foodType")
+                .child("Donations").child("Cloth").orderByChild("clothType")
                 .equalTo(donateFoodType.getSelectedItem().toString());
 
         ChildEventListener listener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 //Add products to adapter to show on MainActivity
-                foodDonationAdapter.add(dataSnapshot.getValue(FoodDonation.class));
+                clothDonationAdapter.add(dataSnapshot.getValue(ClothDonation.class));
                 //Notify the ListView to update changes
-                foodDonationAdapter.notifyDataSetChanged();
+                clothDonationAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                foodDonationAdapter.notifyDataSetChanged();
+                clothDonationAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                foodDonationAdapter.notifyDataSetChanged();
+                clothDonationAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                foodDonationAdapter.notifyDataSetChanged();
+                clothDonationAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(FoodSearchActivity.this, "Something Wrong!", Toast.LENGTH_LONG).show();
+                Toast.makeText(ClothSearchActivity.this, "Something Wrong!", Toast.LENGTH_LONG).show();
             }
         };
 
@@ -96,9 +97,9 @@ public class FoodSearchActivity extends AppCompatActivity {
 
         //Open the list item in which user clicked on
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
-            FoodDonation donation = foodDonationAdapter.getItem(i);
-            Intent intent = new Intent(FoodSearchActivity.this, FoodDonationViewActivity.class);
-            intent.putExtra("selectedFoodDonation", (Serializable) donation);
+            ClothDonation donation = clothDonationAdapter.getItem(i);
+            Intent intent = new Intent(ClothSearchActivity.this, ClothDonationViewActivity.class);
+            intent.putExtra("selectedClothDonation", (Serializable) donation);
             startActivity(intent);
         });
 
@@ -107,18 +108,18 @@ public class FoodSearchActivity extends AppCompatActivity {
             //Remove the previous listener
             databaseReference.removeEventListener(listener);
             //Clearing old arrayList and adapter
-            foodDonationAdapter.clear();
+            clothDonationAdapter.clear();
 
             String donationSearchParam = donationSearchInput.getText().toString().trim();
             //Check if donation search query exist then do query on that parameter
             if(donationSearchParam.length() != 0) {
                 databaseReference = FirebaseDatabase.getInstance().getReference()
-                        .child("Donations").child("Food").orderByChild("location")
+                        .child("Donations").child("Cloth").orderByChild("location")
                         .equalTo(donationSearchInput.getText().toString().trim());
             }else {
                 //Updating the database reference with new option selected
                 databaseReference = FirebaseDatabase.getInstance().getReference()
-                        .child("Donations").child("Food").orderByChild("foodType")
+                        .child("Donations").child("Cloth").orderByChild("clothType")
                         .equalTo(donateFoodType.getSelectedItem().toString());
             }
 
@@ -132,21 +133,21 @@ public class FoodSearchActivity extends AppCompatActivity {
                         donationNotFoundView.setVisibility(View.GONE);
 
                         //Getting the current search object
-                        FoodDonation donation = dataSnapshot.getValue(FoodDonation.class);
+                        ClothDonation donation = dataSnapshot.getValue(ClothDonation.class);
 
                         //If search param exist and is equal to "foodType" field
                         if(donationSearchParam.length() != 0 &&
                                 donateFoodType.getSelectedItem().toString().
-                                        equals(donation != null ? donation.getFoodType() : null)){
-                            foodDonationAdapter.add(dataSnapshot.getValue(FoodDonation.class));
-                            foodDonationAdapter.notifyDataSetChanged();
+                                        equals(donation != null ? donation.getClothType() : null)){
+                            clothDonationAdapter.add(dataSnapshot.getValue(ClothDonation.class));
+                            clothDonationAdapter.notifyDataSetChanged();
                         }
                         //If no search param found then query throw "foodType" option
                         else if(donationSearchParam.length() == 0){
                             //Add products to adapter to show on MainActivity
-                            foodDonationAdapter.add(dataSnapshot.getValue(FoodDonation.class));
+                            clothDonationAdapter.add(dataSnapshot.getValue(ClothDonation.class));
                             //Notify the ListView to update changes
-                            foodDonationAdapter.notifyDataSetChanged();
+                            clothDonationAdapter.notifyDataSetChanged();
                         }
                     }else {
                         //Show NOT FOUND message if no query result found
@@ -157,22 +158,22 @@ public class FoodSearchActivity extends AppCompatActivity {
 
                 @Override
                 public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    foodDonationAdapter.notifyDataSetChanged();
+                    clothDonationAdapter.notifyDataSetChanged();
                 }
 
                 @Override
                 public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                    foodDonationAdapter.notifyDataSetChanged();
+                    clothDonationAdapter.notifyDataSetChanged();
                 }
 
                 @Override
                 public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    foodDonationAdapter.notifyDataSetChanged();
+                    clothDonationAdapter.notifyDataSetChanged();
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(FoodSearchActivity.this, "Something Wrong!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ClothSearchActivity.this, "Something Wrong!", Toast.LENGTH_LONG).show();
                 }
             };
             databaseReference.addChildEventListener(queryListener);

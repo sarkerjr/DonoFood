@@ -17,22 +17,20 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.rashed.donofood.Models.FoodDonation;
+import com.rashed.donofood.Models.ClothDonation;
 import com.rashed.donofood.R;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 
-public class FoodDonationEditActivity extends AppCompatActivity {
+public class ClothDonationEditActivity extends AppCompatActivity {
 
     ImageView donate_image_id;
     Button edit_donation_btn;
@@ -58,14 +56,14 @@ public class FoodDonationEditActivity extends AppCompatActivity {
         loadingIndicator = findViewById(R.id.loadingIndicator);
 
         //Get selected Donation object from previous activity
-        FoodDonation donation = (FoodDonation) getIntent().getSerializableExtra("passedDonation");
+        ClothDonation donation = (ClothDonation) getIntent().getSerializableExtra("passedDonation");
 
         //Initializing food type spinner
         food_type_id.setAdapter(new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item, new String[]{"Veg", "Non-Veg"}));
+                android.R.layout.simple_spinner_dropdown_item, new String[]{"Summer", "Winter"}));
 
-        food_name_id.setText(donation.getFoodName());
-        food_type_id.setSelection(getSpinnerPosition(donation.getFoodType()));
+        food_name_id.setText(donation.getClothName());
+        food_type_id.setSelection(getSpinnerPosition(donation.getClothType()));
         food_quantity_id.setText(String.valueOf(donation.getQuantity()));
         area_id.setText(donation.getLocation());
         phone_id.setText(donation.getPhone());
@@ -79,18 +77,18 @@ public class FoodDonationEditActivity extends AppCompatActivity {
         });
 
         edit_donation_btn.setOnClickListener(view -> {
-            String foodName = String.valueOf(food_name_id.getText());
-            String foodType = food_type_id.getSelectedItem().toString();
+            String clothName = String.valueOf(food_name_id.getText());
+            String clothType = food_type_id.getSelectedItem().toString();
             int quantity = Integer.parseInt(String.valueOf(food_quantity_id.getText()));
             String area = String.valueOf(area_id.getText());
             String phone = String.valueOf(phone_id.getText());
 
-            FoodDonation newDonation =
-                    new FoodDonation(donation.getUid(), foodName, foodType, quantity, area, phone,
+            ClothDonation newDonation =
+                    new ClothDonation(donation.getUid(), clothName, clothType, quantity, area, phone,
                             donation.getImageFileName());
 
             //Check if fields are updated
-            if (!foodName.equals(donation.getFoodName()) || !foodType.equals(donation.getFoodType())
+            if (!clothName.equals(donation.getClothName()) || !clothType.equals(donation.getClothType())
                     || quantity != donation.getQuantity() || !area.equals(donation.getLocation())
                     || !phone.equals(donation.getPhone())) {
                 editDonation(donation, newDonation);
@@ -101,19 +99,19 @@ public class FoodDonationEditActivity extends AppCompatActivity {
     //getting the position of the selected foodType value
     int getSpinnerPosition(String location) {
         switch (location){
-            case "Veg":
+            case "Summer":
                 return 0;
-            case "Non-Veg":
+            case "Winter":
                 return 1;
         }
         return 0;
     }
 
-    void editDonation(FoodDonation oldDonation, FoodDonation newDonation) {
+    void editDonation(ClothDonation oldDonation, ClothDonation newDonation) {
         loadingIndicator.setVisibility(View.VISIBLE);
 
         Query databaseReference = FirebaseDatabase.getInstance().getReference()
-                .child("Donations").child("Food").orderByChild("imageFileName")
+                .child("Donations").child("Cloth").orderByChild("imageFileName")
                 .equalTo(oldDonation.getImageFileName());
 
         ChildEventListener childEventListener = new ChildEventListener() {
@@ -121,16 +119,16 @@ public class FoodDonationEditActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 String nodeKey = snapshot.getKey();
                 assert nodeKey != null;
-                FirebaseDatabase.getInstance().getReference().child("Donations").child("Food")
+                FirebaseDatabase.getInstance().getReference().child("Donations").child("Cloth")
                         .child(nodeKey).setValue(newDonation).addOnSuccessListener(view -> {
                     loadingIndicator.setVisibility(View.GONE);
-                    Toast.makeText(FoodDonationEditActivity.this, "Edit Successfully!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ClothDonationEditActivity.this, "Edit Successfully!", Toast.LENGTH_LONG).show();
                     //Passing the newly created donation to search activity
-                    Intent intent = new Intent(FoodDonationEditActivity.this, EditEntryActivity.class);
+                    Intent intent = new Intent(ClothDonationEditActivity.this, EditEntryActivity.class);
                     startActivity(intent);
                 }).addOnFailureListener(view -> {
                     loadingIndicator.setVisibility(View.GONE);
-                    Toast.makeText(FoodDonationEditActivity.this,
+                    Toast.makeText(ClothDonationEditActivity.this,
                             "Something went wrong! Please try again!",Toast.LENGTH_LONG).show();
                     Log.i(TAG, "onChildAdded: " + view.getMessage());
                 });

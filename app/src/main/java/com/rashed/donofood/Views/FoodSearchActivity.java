@@ -51,7 +51,7 @@ public class FoodSearchActivity extends AppCompatActivity {
         donateFoodType.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item, new String[]{"Veg", "Non-Veg"}));
 
-        //This arrayList is for listView onItemClickListener
+        //Initializing adapter for listview
         foodDonationAdapter = new FoodDonationAdapter(FoodSearchActivity.this, new ArrayList<FoodDonation>());
         listView.setAdapter(foodDonationAdapter);
         foodDonationAdapter.notifyDataSetChanged();

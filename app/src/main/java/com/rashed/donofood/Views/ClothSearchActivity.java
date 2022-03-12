@@ -52,7 +52,7 @@ public class ClothSearchActivity extends AppCompatActivity {
         donateFoodType.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item, new String[]{"Summer", "Winter"}));
 
-        //This arrayList is for listView onItemClickListener
+        //Initializing adapter for listview
         clothDonationAdapter = new ClothDonationAdapter(ClothSearchActivity.this, new ArrayList<ClothDonation>());
         listView.setAdapter(clothDonationAdapter);
         clothDonationAdapter.notifyDataSetChanged();

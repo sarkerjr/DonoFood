@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DonoFood">
         <activity
+            android:name=".Views.ClothDonationEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Views.EditEntryActivity"
+            android:exported="false" />
+        <activity
             android:name=".Views.ClothDonationViewActivity"
             android:exported="false" />
         <activity

@@ -51,7 +51,7 @@ public class ClothDonateAddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cloth_donation);
 
         if(FirebaseAuth.getInstance().getCurrentUser() == null)
-            startActivity(new Intent(ClothDonateAddActivity.this, SignInActivity.class));
+            startActivity(new Intent(ClothDonateAddActivity.this, SignInUserActivity.class));
 
         cloth_name_id = findViewById(R.id.input_cloth_name);
         cloth_quantity_id = findViewById(R.id.input_cloth_quantity_id);

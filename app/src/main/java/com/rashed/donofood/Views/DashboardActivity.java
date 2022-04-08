@@ -26,7 +26,7 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         if(FirebaseAuth.getInstance().getCurrentUser() == null)
-            startActivity(new Intent(DashboardActivity.this, SignInActivity.class));
+            startActivity(new Intent(DashboardActivity.this, SignInUserActivity.class));
 
         addDonationFoodView = findViewById(R.id.donate_food_id);
         addDonationClothView = findViewById(R.id.donate_cloth_id);

@@ -53,7 +53,7 @@ public class FoodDonateAddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_food_donation);
 
         if(FirebaseAuth.getInstance().getCurrentUser() == null)
-            startActivity(new Intent(FoodDonateAddActivity.this, SignInActivity.class));
+            startActivity(new Intent(FoodDonateAddActivity.this, SignInUserActivity.class));
 
         food_name_id = findViewById(R.id.input_food_name);
         food_quantity_id = findViewById(R.id.input_food_quantity_id);

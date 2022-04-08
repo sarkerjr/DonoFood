@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DonoFood">
         <activity
+            android:name=".Views.NgoDashboardActivity"
+            android:exported="false" />
+        <activity
             android:name=".Views.RegisterUserActivity"
             android:exported="false" />
         <activity

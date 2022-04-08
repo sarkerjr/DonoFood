@@ -182,6 +182,6 @@ public class FoodSearchActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, DashboardActivity.class));
+        startActivity(new Intent(this, SignInUserActivity.class));
     }
 }

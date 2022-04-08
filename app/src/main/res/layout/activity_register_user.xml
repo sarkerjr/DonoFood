@@ -59,6 +59,24 @@
                 android:backgroundTint="@color/navigation_bg"
                 android:hint="Confirm Password" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text="Register As: "/>
+
+                <Spinner
+                    android:id="@+id/userRoleSelect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
             <Button
                 android:id="@+id/btnSignup"
                 android:layout_width="wrap_content"

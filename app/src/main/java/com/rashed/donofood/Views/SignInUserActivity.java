@@ -1,20 +1,19 @@
 package com.rashed.donofood.Views;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+import com.rashed.donofood.Models.User;
 import com.rashed.donofood.R;
+
+import java.util.Objects;
 
 public class SignInUserActivity extends AppCompatActivity {
 
@@ -36,8 +35,7 @@ public class SignInUserActivity extends AppCompatActivity {
         registerBtn = findViewById(R.id.buttonRegister);
 
         mAuth = FirebaseAuth.getInstance();
-        if(mAuth.getCurrentUser() != null)
-            startActivity(new Intent(this, DashboardActivity.class));
+        if(mAuth.getCurrentUser() != null) checkUserRole();
 
         loginBtn.setOnClickListener(view -> userSignIn());
         registerBtn.setOnClickListener(view -> startActivity(new Intent(this, RegisterUserActivity.class)));
@@ -50,10 +48,32 @@ public class SignInUserActivity extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful())
-                        startActivity(new Intent(SignInUserActivity.this, DashboardActivity.class));
+                        checkUserRole();
                     else
                         Toast.makeText(SignInUserActivity.this, "Incorrect email or password!",
                                 Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    void checkUserRole() {
+        FirebaseDatabase.getInstance().getReference().child("Users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).get()
+                .addOnCompleteListener(task -> {
+                    if(!task.isSuccessful()){
+                        Toast.makeText(this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                        //If can not retrieve USER ROLE from database, restart activity
+                        Intent intent = getIntent();
+                        finish();
+                        startActivity(intent);
+                    }else {
+                        User user = Objects.requireNonNull(task.getResult()).getValue(User.class);
+                        assert user != null;
+
+                        if(user.getRole().equals("USER"))
+                            startActivity(new Intent(SignInUserActivity.this, DashboardActivity.class));
+                        else
+                            startActivity(new Intent(SignInUserActivity.this, NgoDashboardActivity.class));
+                    }
                 });
     }
 }

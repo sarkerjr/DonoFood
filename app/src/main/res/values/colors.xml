@@ -12,4 +12,13 @@
     <color name="list_view_bg_color">#e4e9ef</color>
     <color name="food_donation_search_btn">#FF5722</color>
     <color name="cloth_donation_search_btn">#00BCD4</color>
+
+    <color name="navigation_bg">#677BEC</color>
+    <color name="navigation_text">#FFFFFF</color>
+    <color name="navigation_button">#3F51B5</color>
+    <color name="signup_background">#DF3F51B5</color>
+    <color name="regSuccessColor">#308B55</color>
+    <color name="verification_text">#F44336</color>
+    <color name="progress_bar_color">#F44336</color>
+    <color name="red">#F44336</color>
 </resources>

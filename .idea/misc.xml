@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Workspace/Android/DonoFood/app/src/main/res/drawable/progress_animation.xml" value="0.148" />
+        <entry key="..\:/Workspace/Android/DonoFood/app/src/main/res/layout-v21/activity_register_user.xml" value="0.25416666666666665" />
+        <entry key="..\:/Workspace/Android/DonoFood/app/src/main/res/layout/activity_auth_option.xml" value="0.25416666666666665" />
         <entry key="..\:/Workspace/Android/DonoFood/app/src/main/res/layout/activity_cloth_donation.xml" value="0.24010416666666667" />
         <entry key="..\:/Workspace/Android/DonoFood/app/src/main/res/layout/activity_cloth_donation_edit.xml" value="0.25416666666666665" />
         <entry key="..\:/Workspace/Android/DonoFood/app/src/main/res/layout/activity_cloth_donation_view.xml" value="0.25416666666666665" />
@@ -16,7 +18,10 @@
         <entry key="..\:/Workspace/Android/DonoFood/app/src/main/res/layout/activity_food_donation_view.xml" value="0.264" />
         <entry key="..\:/Workspace/Android/DonoFood/app/src/main/res/layout/activity_food_search.xml" value="0.25416666666666665" />
         <entry key="..\:/Workspace/Android/DonoFood/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Workspace/Android/DonoFood/app/src/main/res/layout/activity_register_user.xml" value="0.25416666666666665" />
         <entry key="..\:/Workspace/Android/DonoFood/app/src/main/res/layout/activity_search.xml" value="0.25416666666666665" />
+        <entry key="..\:/Workspace/Android/DonoFood/app/src/main/res/layout/activity_sign_in_option.xml" value="0.25416666666666665" />
+        <entry key="..\:/Workspace/Android/DonoFood/app/src/main/res/layout/activity_sign_in_user.xml" value="0.25416666666666665" />
         <entry key="..\:/Workspace/Android/DonoFood/app/src/main/res/layout/activity_view_food_donation.xml" value="0.25416666666666665" />
         <entry key="..\:/Workspace/Android/DonoFood/app/src/main/res/layout/donate_search_option.xml" value="0.25416666666666665" />
         <entry key="..\:/Workspace/Android/DonoFood/app/src/main/res/layout/list_item.xml" value="0.4" />

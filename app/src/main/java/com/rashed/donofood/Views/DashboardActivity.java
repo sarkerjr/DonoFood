@@ -52,7 +52,7 @@ public class DashboardActivity extends AppCompatActivity {
         logout.setOnClickListener(view -> AuthUI.getInstance()
                 .signOut(DashboardActivity.this)
                 .addOnSuccessListener(unused -> startActivity(
-                        new Intent(DashboardActivity.this, SignInActivity.class))));
+                        new Intent(DashboardActivity.this, SignInUserActivity.class))));
     }
 
     public void openSearchOptionDialog() {

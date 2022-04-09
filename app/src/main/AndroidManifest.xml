@@ -7,11 +7,14 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DonoFood">
+        <activity
+            android:name=".Views.ViewImageActivity"
+            android:exported="false" />
         <activity
             android:name=".Views.NgoDashboardActivity"
             android:exported="false" />

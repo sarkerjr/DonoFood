@@ -34,18 +34,17 @@ public class ClothDonationViewActivity extends AppCompatActivity {
         donationQty = findViewById(R.id.showDonationQuantity);
         donationArea = findViewById(R.id.showDonationArea);
         donationPhone = findViewById(R.id.showDonationPhone);
-//        editDonationBtn = findViewById(R.id.editDonationButton);
 
         //Get selected Donation object from previous activity
         ClothDonation donation = (ClothDonation) getIntent().getSerializableExtra("selectedClothDonation");
 
         showDonation(donation);
 
-//        editDonationBtn.setOnClickListener(view -> {
-//            Intent intent = new Intent(FoodDonationViewActivity.this, FoodDonationEditActivity.class);
-//            intent.putExtra("passedFoodDonation", (Serializable) donation);
-//            startActivity(intent);
-//        });
+        donationPic.setOnClickListener(view -> {
+            Intent intent = new Intent(this, ViewImageActivity.class);
+            intent.putExtra("imageFileName", donation.getImageFileName());
+            startActivity(intent);
+        });
     }
 
     @Override

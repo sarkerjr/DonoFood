@@ -24,19 +24,20 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
+        //Hide the toolbar to provide full screen
+        if(getSupportActionBar() != null)
+            this.getSupportActionBar().hide();
+
         /* New Handler to start the SignInUserActivity
          * and close this Splash-Screen after some seconds.*/
-        new Handler().postDelayed(new Runnable(){
-            @Override
-            public void run() {
-                if(FirebaseAuth.getInstance().getCurrentUser() != null)
-                    checkUserRole();
-                else {
-                    /* Create an Intent that will start the Menu-Activity. */
-                    Intent intent = new Intent(SplashScreen.this, SignInUserActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
+        new Handler().postDelayed(() -> {
+            if(FirebaseAuth.getInstance().getCurrentUser() != null)
+                checkUserRole();
+            else {
+                /* Create an Intent that will start the Menu-Activity. */
+                Intent intent = new Intent(SplashScreen.this, SignInUserActivity.class);
+                startActivity(intent);
+                finish();
             }
         }, SPLASH_DISPLAY_LENGTH);
     }

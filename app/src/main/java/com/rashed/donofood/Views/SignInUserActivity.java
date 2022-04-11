@@ -2,8 +2,10 @@ package com.rashed.donofood.Views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +25,7 @@ public class SignInUserActivity extends AppCompatActivity {
     Button loginBtn;
 
     FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +71,6 @@ public class SignInUserActivity extends AppCompatActivity {
                     }else {
                         User user = Objects.requireNonNull(task.getResult()).getValue(User.class);
                         assert user != null;
-
                         if(user.getRole().equals("USER"))
                             startActivity(new Intent(SignInUserActivity.this, DashboardActivity.class));
                         else
